@@ -625,15 +625,13 @@ function createHomeMegaPanel() {
   panel.innerHTML = `
     <section class="home-mega-stats" aria-label="站况">
       <p>首页</p>
-      <div><strong>30</strong><span>文稿</span></div>
-      <div><strong>43</strong><span>手记</span></div>
-      <div><strong>186</strong><span>日序</span></div>
+      <div><strong>0</strong><span>文稿</span></div>
+      <div><strong>0</strong><span>手记</span></div>
+      <div><strong>0</strong><span>日序</span></div>
     </section>
     <section class="home-mega-feed" aria-label="近作">
       <p>近作</p>
-      <a href="article.html"><span>飞书机器人助手停止服务</span><time>07.01</time></a>
-      <a href="article.html"><span>用“足迹”聚合</span><time>06.17</time></a>
-      <a href="note-ai.html?note=%E6%97%A0%E6%B3%95%E6%A0%87%E5%AE%9A%E7%9A%84%E6%9C%AA%E6%9D%A5"><span>无法标定的未来</span><time>07.03</time></a>
+      <p class="content-empty-state reveal is-visible">暂无近作。</p>
     </section>
   `;
   return panel;
@@ -1226,391 +1224,8 @@ function normalizeNoteCategoryName(value) {
 }
 const noteArchiveEntries = [];
 
-/* Legacy fallback note data disabled after mojibake repair.
-const legacyNoteCategoryMeta = {
-  "涓€鏃ョ": {
-    "title": "涓€鏃ョ",
-    "description": "璁板綍涓€澶╅噷鐨勭粏鑺傘€佹潅蹇靛拰灏忓皬鐨勫垽鏂?,
-    "mark": "鏃?
-  },
-  "涓冩棩鏈?: {
-    "title": "涓冩棩鏈?,
-    "description": "璁板綍涓€鍛ㄧ殑鑺傚銆佹帹杩涘拰鎭㈠鍔炴硶",
-    "mark": "鍛?
-  },
-  "鏈堢棔褰?: {
-    "title": "鏈堢棔褰?,
-    "description": "璁板綍姣忎釜鏈堢暀涓嬬殑閫熷害銆佺柌鎯拰杞悜",
-    "mark": "鏈?
-  },
-  "宀佹椂涔?: {
-    "title": "宀佹椂涔?,
-    "description": "璁板綍涓€骞寸粨鏉熸椂浠嶇劧鍊煎緱鐣欎笅鐨勭嚎绱?,
-    "mark": "宀?
-  },
-  "灞辨渤璁?: {
-    "title": "灞辨渤璁?,
-    "description": "璁板綍鍘诲埌鐨勫湴鏂癸紝瑙佸埌鐨勪汉",
-    "mark": "娓?
-  }
-};
-const noteCategoryAliases = new Map([
-  ["鏃ヨ", "涓€鏃ョ"],
-  ["鍛ㄨ", "涓冩棩鏈?],
-  ["鏈堣", "鏈堢棔褰?],
-  ["骞磋", "宀佹椂涔?],
-  ["娓歌", "灞辨渤璁?],
-  ["daily", "涓€鏃ョ"],
-  ["weekly", "涓冩棩鏈?],
-  ["monthly", "鏈堢棔褰?],
-  ["yearly", "宀佹椂涔?],
-  ["travel", "灞辨渤璁?],
-]);
-
-function normalizeNoteCategoryName(value) {
-  if (!value) return "涓€鏃ョ";
-  let normalized = String(value).trim();
-  try {
-    normalized = decodeURIComponent(normalized);
-  } catch {}
-  if (noteCategoryMeta[normalized]) return normalized;
-  const lower = normalized.toLowerCase();
-  return noteCategoryAliases.get(normalized) || noteCategoryAliases.get(lower) || "涓€鏃ョ";
-}
-const noteArchiveEntries = [
-  {
-    "type": "涓€鏃ョ",
-    "date": "2026-07-03",
-    "title": "鏃犳硶鏍囧畾鐨勬湭鏉?,
-    "summary": "涔呮病鍐欐墜璁颁簡锛屾渶杩戝仛鐨勪簨鎯呰秺鏉ヨ秺鏉傦紝寰堝鎯虫硶杩樻病鏉ュ緱鍙婂綊绫汇€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "鏈堢棔褰?,
-    "date": "2026-06-30",
-    "title": "鍏湀鐨勯€熷害鍜岀柌鎯?,
-    "summary": "鎶婅繖涓湀鐨勬帹杩涢€熷害閲嶆柊鐪嬩簡涓€閬嶏紝纭鍝簺浜嬫儏鍊煎緱缁х画锛屽摢浜涘彧鏄儻鎬с€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "涓冩棩鏈?,
-    "date": "2026-06-30",
-    "title": "鍏湀鏈€鍚庝竴鍛?,
-    "summary": "宸ヤ綔鑺傚閲嶆柊鎺掑竷锛屽嚑涓暱鏈熶换鍔＄粓浜庢湁浜嗘竻鏅扮殑杈圭晫銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "涓冩棩鏈?,
-    "date": "2026-06-22",
-    "title": "鎶婁緥琛屼簨椤归檷鍣?,
-    "summary": "鍑忓皯閲嶅鎻愰啋锛屾妸鐪熸闇€瑕佸垽鏂殑浜嬫儏鐣欑粰鑷繁銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "涓€鏃ョ",
-    "date": "2026-06-19",
-    "title": "闆ㄥ仠鍚庣殑鍗婂皬鏃?,
-    "summary": "鏁ｆ鍥炴潵锛屾妸娼箍绌烘皵閲岀敓鍑虹殑蹇靛ご褰掓。銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "涓冩棩鏈?,
-    "date": "2026-06-15",
-    "title": "琚細璁垏纰庣殑涓€鍛?,
-    "summary": "璁板綍鍑犱釜琚墦鏂悗鐨勬仮澶嶅姙娉曪紝閬垮厤涓嬩竴鍛ㄧ户缁け鐒︺€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "灞辨渤璁?,
-    "date": "2026-06-13",
-    "title": "绗竴娆′笢浜細杩熷埌 26 骞寸殑鏃呰",
-    "summary": "涓嶆槸鏀荤暐锛屾槸涓€娆℃妸鏈熷緟鏀惧洖鐜板疄閲岀殑鏁ｆ銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "涓€鏃ョ",
-    "date": "2026-06-08",
-    "title": "娌℃湁缁撹鐨勪竴澶?,
-    "summary": "鍏佽鏈変簺浜嬫儏鏆傛椂娌℃湁绛旀锛屽彧鎶婄幇鍦轰繚瀛樹笅鏉ャ€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "涓€鏃ョ",
-    "date": "2026-05-27",
-    "title": "妗岄潰娓呯┖浠ュ悗",
-    "summary": "鏁寸悊鏂囦欢鏃堕『渚挎暣鐞嗕簡涓€涓嬫渶杩戠殑娉ㄦ剰鍔涖€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "鏈堢棔褰?,
-    "date": "2026-05-31",
-    "title": "浜旀湀鐨勫伐鍏锋劅",
-    "summary": "宸ュ叿瓒婃潵瓒婇『鎵嬶紝鍙嶈€屾洿闇€瑕佺晫瀹氫粈涔堜笉璇ヨ嚜鍔ㄥ寲銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "灞辨渤璁?,
-    "date": "2026-05-12",
-    "title": "闆ㄩ噷鐨勮嫃宸炲贩鍙?,
-    "summary": "璧板緱寰堟參锛屽弽鑰岃浣忎簡鏇村娌℃湁鍚嶅瓧鐨勮钀姐€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "鏈堢棔褰?,
-    "date": "2026-04-30",
-    "title": "鍥涙湀鐨勭暀鐧?,
-    "summary": "鍑忓皯椤圭洰鏁伴噺涔嬪悗锛屽垽鏂姏鎱㈡參鍥炲埌姝ｅ父浣嶇疆銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "鏈堢棔褰?,
-    "date": "2026-03-31",
-    "title": "涓夋湀鐨勯噸鍚?,
-    "summary": "閲嶅啓浜嗗嚑涓叆鍙ｏ紝涔熼噸鍐欎簡涓€鐐硅嚜宸辩殑宸ヤ綔涔犳儻銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "宀佹椂涔?,
-    "date": "2025-12-31",
-    "title": "浜屻€囦簩浜旓紝鎱㈡參鎴愬舰",
-    "summary": "杩欎竴骞存病鏈夌獊鐒跺彉濂斤紝浣嗚澶氫笢瑗跨粓浜庡紑濮嬬ǔ瀹氫笅鏉ャ€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "灞辨渤璁?,
-    "date": "2025-10-04",
-    "title": "灞卞煄澶滆矾",
-    "summary": "鍙伴樁銆侀浘姘斿拰鏅氶キ鍚庣殑姹熼锛岀粍鎴愪竴娈佃交寰け閲嶇殑璁板繂銆?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "灞辨渤璁?,
-    "date": "2025-07-19",
-    "title": "娴疯竟鐭殏鍋滅暀",
-    "summary": "娴锋氮娌℃湁缁欑瓟妗堬紝浣嗚寰堝闂鏆傛椂瀹夐潤浜嗕笅鏉ャ€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "宀佹椂涔?,
-    "date": "2024-12-31",
-    "title": "浜屻€囦簩鍥涳紝鍚戝唴鏀舵潫",
-    "summary": "鎶婅繃澶氱殑澶栭儴鐩爣鎷嗘帀锛岄噸鏂扮湅瑙侀暱鏈熸柟鍚戙€?,
-    "href": "note-ai.html"
-  },
-  {
-    "type": "宀佹椂涔?,
-    "date": "2023-12-31",
-    "title": "浜屻€囦簩涓夛紝寮€濮嬭褰?,
-    "summary": "浠庝笉绋冲畾鐨勬兂娉曢噷鎸戝嚭鍑犳潯鐪熸鎰挎剰缁х画鍋氱殑绾裤€?,
-    "href": "note-ai.html"
-  }
-];
-
-*/
 const categoryArchiveData = {};
 
-/* Legacy fallback post data disabled after mojibake repair.
-const legacyCategoryArchiveData = {
-  "鎶€鏈?: {
-    "posts": [
-      {
-        "title": "澶фā鍨嬩笂涓嬫枃闀垮害鐢变粈涔堝喅瀹?,
-        "date": "2026-05-27",
-        "tags": [
-          "LM"
-        ]
-      },
-      {
-        "title": "RL - MDP",
-        "date": "2026-05-18",
-        "tags": []
-      },
-      {
-        "title": "TurboQuant锛氳妭鐪?x鍐呭瓨锛屾彁鍗?x閫熷害",
-        "date": "2026-03-27",
-        "tags": [
-          "LM"
-        ]
-      },
-      {
-        "title": "Agent Skills",
-        "date": "2025-12-31",
-        "tags": [
-          "Skills"
-        ]
-      },
-      {
-        "title": "浠?Function Call 鍒?MCP",
-        "date": "2025-10-20",
-        "tags": [
-          "FunctionCall",
-          "MCP"
-        ]
-      },
-      {
-        "title": "BM25绠楁硶",
-        "date": "2025-04-03",
-        "tags": [
-          "淇℃伅妫€绱?,
-          "鎺掑悕"
-        ]
-      },
-      {
-        "title": "鍗歌浇 python 瑕佸厛瀹夎 python?",
-        "date": "2023-01-01",
-        "tags": [
-          "绋嬪簭",
-          "鍗歌浇"
-        ]
-      }
-    ]
-  },
-  "瀛︿範": {
-    "posts": [
-      {
-        "title": "RL - MDP",
-        "date": "2026-05-18",
-        "tags": [
-          "寮哄寲瀛︿範"
-        ]
-      },
-      {
-        "title": "涓婁笅鏂囩獥鍙ｇ瑪璁?,
-        "date": "2026-04-06",
-        "tags": [
-          "LLM"
-        ]
-      },
-      {
-        "title": "妯″瀷璇勬祴鏂规硶鏁寸悊",
-        "date": "2026-02-17",
-        "tags": [
-          "璇勬祴"
-        ]
-      },
-      {
-        "title": "Agent Skills",
-        "date": "2025-12-31",
-        "tags": [
-          "Agent"
-        ]
-      },
-      {
-        "title": "MCP 宸ュ叿瀛︿範",
-        "date": "2025-11-02",
-        "tags": [
-          "MCP"
-        ]
-      },
-      {
-        "title": "淇℃伅妫€绱㈠崱鐗?,
-        "date": "2025-08-14",
-        "tags": [
-          "妫€绱?
-        ]
-      },
-      {
-        "title": "璇讳功鎽樺綍鐨勭粨鏋?,
-        "date": "2024-10-09",
-        "tags": [
-          "璇讳功"
-        ]
-      }
-    ]
-  },
-  "鎶樿吘": {
-    "posts": [
-      {
-        "title": "椋炰功鏈哄櫒浜哄姪鎵嬪仠姝㈡湇鍔?,
-        "date": "2026-06-20",
-        "tags": [
-          "椋炰功"
-        ]
-      },
-      {
-        "title": "鐢ㄢ€滆冻杩光€濊仛鍚?,
-        "date": "2026-06-17",
-        "tags": [
-          "鍗氬"
-        ]
-      },
-      {
-        "title": "IOS蹇嵎鎸囦护 + 椋炰功 + LLM鍏ㄨ嚜鍔ㄨ璐?,
-        "date": "2026-05-31",
-        "tags": [
-          "IOS",
-          "椋炰功"
-        ]
-      },
-      {
-        "title": "Yohaku 閮ㄧ讲",
-        "date": "2026-05-29",
-        "tags": [
-          "閮ㄧ讲"
-        ]
-      },
-      {
-        "title": "Shiro/Yohaku 涓汉鐘舵€佹姤閿?,
-        "date": "2026-05-29",
-        "tags": [
-          "Yohaku"
-        ]
-      },
-      {
-        "title": "鍗氬澧炲姞鍙嬪湀",
-        "date": "2026-05-28",
-        "tags": [
-          "鍗氬"
-        ]
-      },
-      {
-        "title": "鏈湴椤甸潰婊氬姩鏉″疄楠?,
-        "date": "2026-04-22",
-        "tags": [
-          "浜や簰"
-        ]
-      },
-      {
-        "title": "椤甸潰鑳屾櫙閲嶆瀯",
-        "date": "2026-03-13",
-        "tags": [
-          "璁捐"
-        ]
-      },
-      {
-        "title": "NAS 鏂囦欢鏁寸悊",
-        "date": "2025-12-08",
-        "tags": [
-          "瀛樺偍"
-        ]
-      }
-    ]
-  },
-  "鎬濊€?: {
-    "posts": [
-      {
-        "title": "濡備綍绠＄悊涓婁笅鏂?,
-        "date": "2026-06-01",
-        "tags": [
-          "鏂规硶"
-        ]
-      }
-    ]
-  },
-  "鏁堢巼": {
-    "posts": [
-      {
-        "title": "AI 鏃朵唬鐨勬晥鐜囨倴璁?,
-        "date": "2026-03-01",
-        "tags": [
-          "productivity"
-        ]
-      }
-    ]
-  }
-};
-
-*/
 
 const postsMegaData = Object.fromEntries(Object.entries(categoryArchiveData).map(([category, data]) => [
   category,
@@ -1720,6 +1335,9 @@ function refreshPostsMegaDataset() {
 }
 
 function applyFrontendIndexes({ posts, notes, site }) {
+  const hasIndexPayload = Array.isArray(posts) || Array.isArray(notes);
+  if (!hasIndexPayload) return false;
+
   const nextPosts = (Array.isArray(posts) ? posts : [])
     .filter((post) => post?.visible !== false)
     .map(normalizeIndexPost)
@@ -1728,8 +1346,6 @@ function applyFrontendIndexes({ posts, notes, site }) {
     .filter((note) => note?.visible !== false)
     .map(normalizeIndexNote)
     .filter((note) => note.title);
-
-  if (!nextPosts.length && !nextNotes.length) return false;
 
   Object.keys(categoryArchiveData).forEach((category) => delete categoryArchiveData[category]);
   nextPosts.forEach((post) => {
@@ -1849,13 +1465,15 @@ function getAllArticleWordCount() {
 function getPostFromUrl() {
   const requested = new URLSearchParams(window.location.search).get("post");
   const posts = getAllPostDetails();
-  return posts.find((post) => post.title === requested) || posts[0];
+  if (requested) return posts.find((post) => post.title === requested) || null;
+  return posts[0] || null;
 }
 
 function getNoteFromUrl() {
   const requested = new URLSearchParams(window.location.search).get("note");
   const notes = getSortedNotes("all");
-  return notes.find((note) => note.title === requested) || notes[0];
+  if (requested) return notes.find((note) => note.title === requested) || null;
+  return notes[0] || null;
 }
 
 function createPostsMegaLink(title, date) {
@@ -1902,7 +1520,9 @@ function renderPostsMegaRecent() {
     if (countNode) countNode.textContent = String(count);
   });
   const recentPosts = getAllPostDetails().slice(0, 5);
-  postsMegaList.replaceChildren(...recentPosts.map((post) => createPostsMegaLink(post.title, formatFullDate(post.date))));
+  postsMegaList.replaceChildren(...(recentPosts.length
+    ? recentPosts.map((post) => createPostsMegaLink(post.title, formatFullDate(post.date)))
+    : [createEmptyContentMessage("暂无文稿。")]));
 }
 
 function animatePostsMegaList() {
@@ -2024,9 +1644,16 @@ function rebuildPostsMegaControls() {
   if (!postsMegaPanel) return;
   const categories = Object.keys(categoryArchiveData);
   const cats = postsMegaPanel.querySelector(".posts-mega-cats");
-  if (!cats || !categories.length) return;
+  if (!cats) return;
   const label = document.createElement("p");
   label.textContent = "分类";
+  if (!categories.length) {
+    cats.replaceChildren(label, createEmptyContentMessage("暂无分类。"));
+    postsMegaButtons.splice(0, postsMegaButtons.length);
+    const footerCount = postsMegaPanel.querySelector(".posts-mega-footer a:last-child");
+    if (footerCount) footerCount.textContent = "0 篇文稿";
+    return;
+  }
   cats.replaceChildren(label, ...categories.map((category) => {
     const link = document.createElement("a");
     link.href = `category.html?cat=${encodeURIComponent(category)}`;
@@ -2153,7 +1780,9 @@ function syncNotesMegaCategory(category) {
       countNode.textContent = String(count);
     }
   });
-  notesMegaList.replaceChildren(...notes.map(createNotesMegaLink));
+  notesMegaList.replaceChildren(...(notes.length
+    ? notes.map(createNotesMegaLink)
+    : [createEmptyContentMessage("暂无手记。")]));
 }
 
 function renderNotesMegaRecent() {
@@ -2170,7 +1799,10 @@ function renderNotesMegaRecent() {
     }
     if (countNode) countNode.textContent = String(count);
   });
-  notesMegaList.replaceChildren(...getSortedNotes("all").slice(0, 5).map(createNotesMegaLink));
+  const recentNotes = getSortedNotes("all").slice(0, 5);
+  notesMegaList.replaceChildren(...(recentNotes.length
+    ? recentNotes.map(createNotesMegaLink)
+    : [createEmptyContentMessage("暂无手记。")]));
 }
 
 function animateNotesMegaList() {
@@ -2296,7 +1928,7 @@ function syncTimelineMega() {
   if (timelineMegaCount) timelineMegaCount.textContent = String(total);
   if (timelineMegaYear) timelineMegaYear.textContent = `${progress.yearProgress}%`;
   if (timelineMegaDay) timelineMegaDay.textContent = `${progress.dayProgress}%`;
-  timelineMegaList.replaceChildren(...entries.map((entry) => {
+  timelineMegaList.replaceChildren(...(entries.length ? entries.map((entry) => {
     const link = document.createElement("a");
     link.href = entry.href;
     const title = document.createElement("span");
@@ -2305,7 +1937,7 @@ function syncTimelineMega() {
     time.textContent = formatMonthDay(entry.date);
     link.append(title, time);
     return link;
-  }));
+  }) : [createEmptyContentMessage("暂无时光记录。")]));
 }
 
 function openTimelineMega() {
@@ -2450,26 +2082,34 @@ function renderCategoryPage(categoryPage = document.querySelector("[data-categor
   if (!categoryPage || categoryPage.dataset.categoryRendered === "true") return;
   const category = getCategoryFromUrl();
   const categoryData = categoryArchiveData[category];
-  if (!categoryData) return;
   const categoryTitle = categoryPage.querySelector("[data-category-title]");
   const categoryTotal = categoryPage.querySelector("[data-category-total]");
   const categorySince = categoryPage.querySelector("[data-category-since]");
   const categoryArchive = categoryPage.querySelector("[data-category-archive]");
   const categoryTags = categoryPage.querySelector("[data-category-tags]");
   const categoryNavLabel = document.querySelector("[data-category-nav-label]");
-  const sortedPosts = [...categoryData.posts].sort((a, b) => parsePostDate(b.date) - parsePostDate(a.date));
+  const sortedPosts = categoryData
+    ? [...categoryData.posts].sort((a, b) => parsePostDate(b.date) - parsePostDate(a.date))
+    : [];
   const years = [...new Set(sortedPosts.map((post) => String(parsePostDate(post.date).getFullYear())))].sort((a, b) => b - a);
   const sinceYear = years[years.length - 1] || String(new Date().getFullYear());
   if (!categoryTitle || !categoryTotal || !categoryArchive || !categoryTags) return;
   categoryPage.dataset.categoryRendered = "true";
 
-  document.title = `${category} - 分类 - Replica`;
-  categoryTitle.textContent = category;
+  document.title = categoryData ? `${category} - 分类 - Replica` : "文章分类 - Replica";
+  categoryTitle.textContent = categoryData ? category : "暂无文章";
   categoryTotal.textContent = String(sortedPosts.length);
-  if (categorySince) categorySince.textContent = sinceYear;
+  if (categorySince) categorySince.textContent = sortedPosts.length ? sinceYear : "-";
   if (categoryNavLabel) {
-    categoryNavLabel.textContent = category;
-    categoryNavLabel.href = `category.html?cat=${encodeURIComponent(category)}`;
+    categoryNavLabel.textContent = categoryData ? category : "暂无文章";
+    categoryNavLabel.href = categoryData ? `category.html?cat=${encodeURIComponent(category)}` : "posts.html";
+  }
+
+  if (!sortedPosts.length) {
+    categoryArchive.replaceChildren(createEmptyContentMessage("暂无文章。之后添加 Markdown 后会显示在这里。"));
+    categoryTags.replaceChildren();
+    categoryPage.classList.add("is-visible");
+    return;
   }
 
   categoryArchive.replaceChildren(...years.map((year) => {
@@ -2530,7 +2170,7 @@ function renderCategoryPage(categoryPage = document.querySelector("[data-categor
     interval: 34,
     duration: 520,
   });
-  syncPostsMegaCategory(category);
+  if (categoryData) syncPostsMegaCategory(category);
 }
 
 renderCategoryPage();
@@ -2540,6 +2180,13 @@ function createTextNodeElement(tag, className, text) {
   if (className) node.className = className;
   node.textContent = text;
   return node;
+}
+
+function createEmptyContentMessage(text) {
+  const message = document.createElement("p");
+  message.className = "content-empty-state reveal is-visible";
+  message.textContent = text;
+  return message;
 }
 
 function escapeHtml(value) {
@@ -3362,7 +3009,6 @@ async function renderNoteMarkdown(note, { shell, page }) {
     stripLeadingTitle: true,
     loadingText: "手记 Markdown 正在读取中...",
     errorText: "手记 Markdown 文件读取失败，请检查索引中的 contentPath。",
-    fallback: () => renderNoteFallbackSections(note, { shell, page }),
   });
 }
 
@@ -3420,6 +3066,19 @@ function createArticleMetaBlock(post) {
   return meta;
 }
 
+function renderEmptyDetailPage({ page, shell, hero, renderedKey, title, subtitle }) {
+  page.dataset[renderedKey] = "true";
+  document.title = `${title} - Replica`;
+  shell.querySelectorAll(".article-section, .article-license-section").forEach((section) => section.remove());
+  hero.id = "intro";
+  hero.dataset.railTitle = title;
+  hero.replaceChildren(
+    createTextNodeElement("h1", "article-title", title),
+    createTextNodeElement("p", "article-subtitle", subtitle),
+  );
+  refreshArticleReadingRail();
+}
+
 function renderArticleDetailPage(root = document) {
   if (!window.location.pathname.endsWith("article.html")) return;
   const page = root.querySelector(".article-page");
@@ -3437,7 +3096,17 @@ function renderArticleDetailPage(root = document) {
   }
 
   const post = getPostFromUrl();
-  if (!post) return;
+  if (!post) {
+    renderEmptyDetailPage({
+      page,
+      shell,
+      hero,
+      renderedKey: "articleRendered",
+      title: "暂无文章",
+      subtitle: "当前没有可展示的文章。之后添加 Markdown 后会显示在这里。",
+    });
+    return;
+  }
 
   page.dataset.articleRendered = "loading";
   document.title = post.title + " - 文稿 - Replica";
@@ -3469,7 +3138,17 @@ function renderNoteDetailPage(root = document) {
   }
 
   const note = getNoteFromUrl();
-  if (!note) return;
+  if (!note) {
+    renderEmptyDetailPage({
+      page,
+      shell,
+      hero,
+      renderedKey: "noteRendered",
+      title: "暂无手记",
+      subtitle: "当前没有可展示的手记。之后添加 Markdown 后会显示在这里。",
+    });
+    return;
+  }
 
   page.dataset.noteRendered = "loading";
   page.classList.add("note-detail");
@@ -3533,7 +3212,9 @@ function renderPostsIndexPage(root = document) {
   const tagCloud = postsPage.querySelector(".tag-cloud");
   if (!articleList) return;
 
-  articleList.replaceChildren(...posts.map(createPostListRow));
+  articleList.replaceChildren(...(posts.length
+    ? posts.map(createPostListRow)
+    : [createEmptyContentMessage("暂无文章。之后添加 Markdown 后会显示在这里。")]));
   if (count) count.textContent = `共 ${posts.length} 篇`;
 
   if (tagCloud) {
@@ -3666,7 +3347,9 @@ function renderNotesIndexPage(root = document) {
     return section;
   });
 
-  shell.replaceChildren(...sections);
+  shell.replaceChildren(...(sections.length
+    ? sections
+    : [createEmptyContentMessage("暂无手记。之后添加 Markdown 后会显示在这里。")]));
   delete notesPage.dataset.pjaxBound;
   runStaggerReveal(shell.querySelectorAll(".note-year-heading, .note-letter-row"), {
     baseDelay: 90,
@@ -3698,6 +3381,11 @@ function buildIndexTimelineEntries() {
 function renderTimelineArchiveFromEntries(timelinePage, entries) {
   const archive = timelinePage?.querySelector("[data-timeline-archive]");
   if (!archive) return;
+  if (!entries.length) {
+    archive.replaceChildren(createEmptyContentMessage("暂无时间线内容。之后添加文章或手记后会显示在这里。"));
+    archive.classList.add("is-visible");
+    return;
+  }
   const monthNames = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
   const monthCodes = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   const byYear = entries.reduce((years, entry) => {
@@ -3775,17 +3463,25 @@ function renderHomeIndexPage(root = document) {
   const list = home.querySelector(".home-writing-list");
   const stats = home.querySelector(".wibus-stats");
   if (stats) stats.textContent = `${posts.length} posts / ${notes.length} notes / ${getTimelineProgressSnapshot().dayOfYear} days`;
-  if (featured && posts[0]) {
-    featured.href = getArticleUrl(posts[0]);
-    featured.querySelector(".home-featured-type").textContent = posts[0].category;
-    featured.querySelector("strong").textContent = posts[0].title;
-    featured.querySelector("em").textContent = posts[0].summary || `${posts[0].wordCount || 0} 字`;
-    featured.querySelector("small").textContent = `${formatFullDate(posts[0].date)} / ${posts[0].category}`;
+  if (featured) {
+    if (posts[0]) {
+      featured.href = getArticleUrl(posts[0]);
+      featured.querySelector(".home-featured-type").textContent = posts[0].category;
+      featured.querySelector("strong").textContent = posts[0].title;
+      featured.querySelector("em").textContent = posts[0].summary || `${posts[0].wordCount || 0} 字`;
+      featured.querySelector("small").textContent = `${formatFullDate(posts[0].date)} / ${posts[0].category}`;
+    } else {
+      featured.removeAttribute("href");
+      featured.querySelector(".home-featured-type").textContent = "EMPTY";
+      featured.querySelector("strong").textContent = "暂无文章";
+      featured.querySelector("em").textContent = "之后添加 Markdown 后会显示在这里。";
+      featured.querySelector("small").textContent = "0 posts";
+    }
   }
   if (list) {
     const items = [...posts.slice(1, 4).map((post) => ({ ...post, href: getArticleUrl(post), meta: `${post.category} / 文稿` })),
       ...notes.slice(0, 1).map((note) => ({ ...note, href: getNoteUrl(note), meta: `手记 / ${note.type}` }))];
-    list.replaceChildren(...items.map((item) => {
+    list.replaceChildren(...(items.length ? items.map((item) => {
       const link = document.createElement("a");
       link.href = item.href;
       const time = document.createElement("time");
@@ -3796,7 +3492,7 @@ function renderHomeIndexPage(root = document) {
       meta.textContent = item.meta;
       link.append(time, title, meta);
       return link;
-    }));
+    }) : [createEmptyContentMessage("暂无近作。")]));
   }
 }
 
@@ -3814,7 +3510,7 @@ function refreshHomeMegaPanel() {
   label.textContent = "近作";
   const items = [...posts.slice(0, 2).map((post) => ({ title: post.title, date: post.date, href: getArticleUrl(post) })),
     ...notes.slice(0, 1).map((note) => ({ title: note.title, date: note.date, href: getNoteUrl(note) }))];
-  feed.replaceChildren(label, ...items.map((item) => {
+  feed.replaceChildren(label, ...(items.length ? items.map((item) => {
     const link = document.createElement("a");
     link.href = item.href;
     const title = document.createElement("span");
@@ -3824,7 +3520,7 @@ function refreshHomeMegaPanel() {
     link.append(title, time);
     attachPjaxLinkHandler(link);
     return link;
-  }));
+  }) : [createEmptyContentMessage("暂无近作。")]));
 }
 
 function renderIndexBackedCurrentPage(root = document, options = {}) {
