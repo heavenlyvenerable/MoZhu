@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.vercel/
+content/indexes/
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+Thumbs.db
+
+**/.obsidian/workspace.json
+**/.obsidian/workspace-mobile.json
+**/.obsidian/cache/

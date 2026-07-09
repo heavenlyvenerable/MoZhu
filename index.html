@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon-frontend-bamboo.png?v=real-icon-1" type="image/png">
+  <title>首页 - Replica</title>
+  <link rel="stylesheet" href="styles.css?v=math-katex-1">
+  <link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=math-katex-1">
+</head>
+<body>
+  <canvas id="particle-field" aria-hidden="true"></canvas>
+  <header class="site-chrome" aria-label="site navigation">
+    <a class="avatar-button" href="index.html" aria-label="home"><img src="assets/avatar-bamboo.png?v=ink-bamboo-avatar-1" alt="Bamboo avatar"></a>
+    <nav class="main-nav" aria-label="main navigation">
+      <a class="nav-item is-active" href="index.html" data-nav>首页</a>
+      <a class="nav-item" href="posts.html" data-nav>文稿</a>
+      <a class="nav-item" href="notes.html" data-nav>手记</a>
+      <a class="nav-item" href="timeline.html" data-nav>时光</a>
+      <a class="nav-item" href="projects.html" data-nav>项目</a>
+      <a class="nav-item" href="says.html" data-nav>一言</a>
+      <button class="nav-item nav-more" type="button" aria-expanded="false">更多</button>
+      <div class="nav-menu" id="nav-menu" aria-hidden="true">
+        <a href="friends.html">朋友们</a>
+        <a href="about.html">关于</a>
+        <a href="message.html">留言</a>
+      </div>
+    </nav>
+    <button class="visitor-button" type="button" aria-label="visitor status"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6.5a3 3 0 1 0-6 0 3 3 0 0 0 6 0ZM6.5 18.5c.7-3.1 2.6-4.6 5.5-4.6.8 0 1.5.1 2.1.4M18 14v6M15 17h6"/></svg></button>
+    <div class="visitor-popover" id="visitor-popover" aria-hidden="true"><span class="live-dot"></span>正被 3 人浏览</div>
+  </header>
+
+  <main class="wibus-home" id="home">
+    <section class="wibus-hero">
+      <div class="wibus-identity reveal">
+        <img class="wibus-avatar" src="assets/avatar-bamboo.png?v=ink-bamboo-avatar-1" alt="Bamboo avatar">
+        <p class="wibus-hi">Hi, I'm</p>
+        <h1>
+          <span>竹间工作台</span>
+          <small>👋</small>
+          <br>
+          <em>A</em> <code>&lt;/&gt;</code> Developer &amp; #Writer
+        </h1>
+        <p class="wibus-desc">整理文稿、手记、时光与项目，把日常工作里值得留下的东西慢慢沉淀。</p>
+        <blockquote>「把复杂的事情放慢，把有用的线索留下。」</blockquote>
+        <p class="wibus-stats">30 posts · 43 notes · 186 days</p>
+      </div>
+    </section>
+
+    <section class="home-recent-writing reveal" aria-label="Recent writing">
+      <header class="home-section-head">
+        <p>Recent Writing</p>
+        <a href="posts.html">All posts</a>
+      </header>
+      <a class="home-featured-writing" href="article.html">
+        <span class="home-featured-type">置顶</span>
+        <strong>飞书机器人助手停止服务</strong>
+        <em>今天 1 号发工资，我和往常一样使用快捷指令记账，然后准备打开飞书仪表盘查看上个月支出情况，但最新记录却停留在旧数据里。</em>
+        <small>2026年6月20日 · 折腾 / 博客</small>
+      </a>
+      <div class="home-writing-list">
+        <a href="article.html">
+          <time>2026-06-17</time>
+          <span>用“足迹”聚合</span>
+          <small>折腾 / 博客</small>
+        </a>
+        <a href="article.html">
+          <time>2026-06-01</time>
+          <span>如何管理上下文</span>
+          <small>思考 / 博文</small>
+        </a>
+        <a href="article.html">
+          <time>2026-05-31</time>
+          <span>IOS快捷指令 + 飞书 + LLM全自动记账</span>
+          <small>折腾 / IOS</small>
+        </a>
+        <a href="note-ai.html">
+          <time>2026-07-03</time>
+          <span>无法标定的未来</span>
+          <small>手记 / 一日笺</small>
+        </a>
+      </div>
+    </section>
+
+    <section class="home-greetings reveal" aria-label="Summer greetings">
+      <h2>盛夏流金</h2>
+      <p>欢迎来信，留下印记，慢慢翻阅。</p>
+      <div>
+        <a href="message.html">欢迎来信</a>
+        <a href="timeline.html">翻看时光</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/vendor/katex/katex.min.js?v=math-katex-1"></script>
+  <script src="script.js?v=math-katex-1"></script>
+</body>
+</html>

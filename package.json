@@ -1,0 +1,10 @@
+{
+  "name": "myweb-obsidian-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build-content.mjs",
+    "preview": "npm run build && node tools/serve-static.mjs dist 4173"
+  }
+}

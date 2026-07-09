@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon-frontend-bamboo.png?v=real-icon-1" type="image/png">
+  <title>手记 - Replica</title>
+  <link rel="stylesheet" href="styles.css?v=math-katex-1">
+  <link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=math-katex-1">
+</head>
+<body>
+  <canvas id="particle-field" aria-hidden="true"></canvas>
+  <header class="site-chrome" aria-label="site navigation">
+    <a class="avatar-button" href="index.html" aria-label="home"><img src="assets/avatar-bamboo.png?v=ink-bamboo-avatar-1" alt="Bamboo avatar"></a>
+    <nav class="main-nav" aria-label="main navigation">
+      <a class="nav-item" href="index.html" data-nav>首页</a>
+      <a class="nav-item" href="posts.html" data-nav>文稿</a>
+      <a class="nav-item is-active" href="notes.html" data-nav>手记</a>
+      <a class="nav-item" href="timeline.html" data-nav>时光</a>
+      <a class="nav-item" href="projects.html" data-nav>项目</a>
+      <a class="nav-item" href="says.html" data-nav>一言</a>
+      <button class="nav-item nav-more" type="button" aria-expanded="false">更多</button>
+      <div class="nav-menu" id="nav-menu" aria-hidden="true"><a href="friends.html">朋友们</a><a href="about.html">关于</a><a href="message.html">留言</a></div>
+    </nav>
+    <button class="visitor-button" type="button" aria-label="visitor status"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6.5a3 3 0 1 0-6 0 3 3 0 0 0 6 0ZM6.5 18.5c.7-3.1 2.6-4.6 5.5-4.6.8 0 1.5.1 2.1.4M18 14v6M15 17h6"/></svg></button>
+    <div class="visitor-popover" id="visitor-popover" aria-hidden="true"><span class="live-dot"></span>正被 3 人披览</div>
+  </header>
+  <main class="page-frame notes-index notes-letter-page" id="notes">
+    <section class="notes-letter-shell">
+      <section class="note-year-section reveal">
+        <header class="note-year-heading"><div><span>ANNO</span><h2>2026</h2></div><p>12 LETTERS</p></header>
+        <div class="note-letter-list">
+          <article class="note-letter-row" data-note-item data-note-type="月痕录" data-note-date="2026-06-30">
+            <div class="note-date-rail"><span>30</span><small>6月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E5%85%AD%E6%9C%88%E7%9A%84%E9%80%9F%E5%BA%A6%E5%92%8C%E7%96%B2%E6%83%AB"><header><span class="letter-badge badge-monthly">月痕录</span><small>晴 · 片刻</small></header><h3>六月的速度和疲惫</h3><p>把这个月的推进速度重新看了一遍，确认哪些事情值得继续，哪些只是惯性。</p><footer><span>LETTER No.17</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="七日札" data-note-date="2026-06-30">
+            <div class="note-date-rail"><span>30</span><small>6月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E5%85%AD%E6%9C%88%E6%9C%80%E5%90%8E%E4%B8%80%E5%91%A8"><header><span class="letter-badge badge-weekly">七日札</span><small>晴 · 片刻</small></header><h3>六月最后一周</h3><p>工作节奏重新排布，几个长期任务终于有了清晰的边界。</p><footer><span>LETTER No.16</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="七日札" data-note-date="2026-06-22">
+            <div class="note-date-rail"><span>22</span><small>6月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E6%8A%8A%E4%BE%8B%E8%A1%8C%E4%BA%8B%E9%A1%B9%E9%99%8D%E5%99%AA"><header><span class="letter-badge badge-weekly">七日札</span><small>晴 · 片刻</small></header><h3>把例行事项降噪</h3><p>减少重复提醒，把真正需要判断的事情留给自己。</p><footer><span>LETTER No.15</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="一日笺" data-note-date="2026-06-19">
+            <div class="note-date-rail"><span>19</span><small>6月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E9%9B%A8%E5%81%9C%E5%90%8E%E7%9A%84%E5%8D%8A%E5%B0%8F%E6%97%B6"><header><span class="letter-badge badge-daily">一日笺</span><small>晴 · 片刻</small></header><h3>雨停后的半小时</h3><p>散步回来，把潮湿空气里生出的念头归档。</p><footer><span>LETTER No.14</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="七日札" data-note-date="2026-06-15">
+            <div class="note-date-rail"><span>15</span><small>6月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E8%A2%AB%E4%BC%9A%E8%AE%AE%E5%88%87%E7%A2%8E%E7%9A%84%E4%B8%80%E5%91%A8"><header><span class="letter-badge badge-weekly">七日札</span><small>晴 · 片刻</small></header><h3>被会议切碎的一周</h3><p>记录几个被打断后的恢复办法，避免下一周继续失焦。</p><footer><span>LETTER No.13</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="山河记" data-note-date="2026-06-13">
+            <div class="note-date-rail"><span>13</span><small>6月</small><b></b></div>
+            <a class="note-letter-card has-ribbon" href="note-ai.html?note=%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%9C%E4%BA%AC%EF%BC%9A%E8%BF%9F%E5%88%B0%2026%20%E5%B9%B4%E7%9A%84%E6%97%85%E8%A1%8C"><header><span class="letter-badge badge-travel">山河记</span><small>晴 · 片刻</small></header><h3>第一次东京：迟到 26 年的旅行</h3><p>不是攻略，是一次把期待放回现实里的散步。</p><footer><span>LETTER No.12</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="一日笺" data-note-date="2026-06-08">
+            <div class="note-date-rail"><span>08</span><small>6月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E6%B2%A1%E6%9C%89%E7%BB%93%E8%AE%BA%E7%9A%84%E4%B8%80%E5%A4%A9"><header><span class="letter-badge badge-daily">一日笺</span><small>晴 · 片刻</small></header><h3>没有结论的一天</h3><p>允许有些事情暂时没有答案，只把现场保存下来。</p><footer><span>LETTER No.11</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="一日笺" data-note-date="2026-05-27">
+            <div class="note-date-rail"><span>27</span><small>5月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E6%A1%8C%E9%9D%A2%E6%B8%85%E7%A9%BA%E4%BB%A5%E5%90%8E"><header><span class="letter-badge badge-daily">一日笺</span><small>晴 · 片刻</small></header><h3>桌面清空以后</h3><p>整理文件时顺便整理了一下最近的注意力。</p><footer><span>LETTER No.10</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="月痕录" data-note-date="2026-05-31">
+            <div class="note-date-rail"><span>31</span><small>5月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E4%BA%94%E6%9C%88%E7%9A%84%E5%B7%A5%E5%85%B7%E6%84%9F"><header><span class="letter-badge badge-monthly">月痕录</span><small>晴 · 片刻</small></header><h3>五月的工具感</h3><p>工具越来越顺手，反而更需要界定什么不该自动化。</p><footer><span>LETTER No.9</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="山河记" data-note-date="2026-05-12">
+            <div class="note-date-rail"><span>12</span><small>5月</small><b></b></div>
+            <a class="note-letter-card has-ribbon" href="note-ai.html?note=%E9%9B%A8%E9%87%8C%E7%9A%84%E8%8B%8F%E5%B7%9E%E5%B7%B7%E5%8F%A3"><header><span class="letter-badge badge-travel">山河记</span><small>晴 · 片刻</small></header><h3>雨里的苏州巷口</h3><p>走得很慢，反而记住了更多没有名字的角落。</p><footer><span>LETTER No.8</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="月痕录" data-note-date="2026-04-30">
+            <div class="note-date-rail"><span>30</span><small>4月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E5%9B%9B%E6%9C%88%E7%9A%84%E7%95%99%E7%99%BD"><header><span class="letter-badge badge-monthly">月痕录</span><small>晴 · 片刻</small></header><h3>四月的留白</h3><p>减少项目数量之后，判断力慢慢回到正常位置。</p><footer><span>LETTER No.7</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="月痕录" data-note-date="2026-03-31">
+            <div class="note-date-rail"><span>31</span><small>3月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E4%B8%89%E6%9C%88%E7%9A%84%E9%87%8D%E5%90%AF"><header><span class="letter-badge badge-monthly">月痕录</span><small>晴 · 片刻</small></header><h3>三月的重启</h3><p>重写了几个入口，也重写了一点自己的工作习惯。</p><footer><span>LETTER No.6</span><span>阅读全文 →</span></footer></a>
+          </article>
+        </div>
+      </section>
+      <section class="note-year-section reveal">
+        <header class="note-year-heading"><div><span>ANNO</span><h2>2025</h2></div><p>3 LETTERS</p></header>
+        <div class="note-letter-list">
+          <article class="note-letter-row" data-note-item data-note-type="岁时书" data-note-date="2025-12-31">
+            <div class="note-date-rail"><span>31</span><small>12月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E4%BA%8C%E3%80%87%E4%BA%8C%E4%BA%94%EF%BC%8C%E6%85%A2%E6%85%A2%E6%88%90%E5%BD%A2"><header><span class="letter-badge badge-yearly">岁时书</span><small>晴 · 片刻</small></header><h3>二〇二五，慢慢成形</h3><p>这一年没有突然变好，但许多东西终于开始稳定下来。</p><footer><span>LETTER No.5</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="山河记" data-note-date="2025-10-04">
+            <div class="note-date-rail"><span>04</span><small>10月</small><b></b></div>
+            <a class="note-letter-card has-ribbon" href="note-ai.html?note=%E5%B1%B1%E5%9F%8E%E5%A4%9C%E8%B7%AF"><header><span class="letter-badge badge-travel">山河记</span><small>晴 · 片刻</small></header><h3>山城夜路</h3><p>台阶、雾气和晚饭后的江风，组成一段轻微失重的记忆。</p><footer><span>LETTER No.4</span><span>阅读全文 →</span></footer></a>
+          </article>
+          <article class="note-letter-row" data-note-item data-note-type="山河记" data-note-date="2025-07-19">
+            <div class="note-date-rail"><span>19</span><small>7月</small><b></b></div>
+            <a class="note-letter-card has-ribbon" href="note-ai.html?note=%E6%B5%B7%E8%BE%B9%E7%9F%AD%E6%9A%82%E5%81%9C%E7%95%99"><header><span class="letter-badge badge-travel">山河记</span><small>晴 · 片刻</small></header><h3>海边短暂停留</h3><p>海浪没有给答案，但让很多问题暂时安静了下来。</p><footer><span>LETTER No.3</span><span>阅读全文 →</span></footer></a>
+          </article>
+        </div>
+      </section>
+      <section class="note-year-section reveal">
+        <header class="note-year-heading"><div><span>ANNO</span><h2>2024</h2></div><p>1 LETTERS</p></header>
+        <div class="note-letter-list">
+          <article class="note-letter-row" data-note-item data-note-type="岁时书" data-note-date="2024-12-31">
+            <div class="note-date-rail"><span>31</span><small>12月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E4%BA%8C%E3%80%87%E4%BA%8C%E5%9B%9B%EF%BC%8C%E5%90%91%E5%86%85%E6%94%B6%E6%9D%9F"><header><span class="letter-badge badge-yearly">岁时书</span><small>晴 · 片刻</small></header><h3>二〇二四，向内收束</h3><p>把过多的外部目标拆掉，重新看见长期方向。</p><footer><span>LETTER No.2</span><span>阅读全文 →</span></footer></a>
+          </article>
+        </div>
+      </section>
+      <section class="note-year-section reveal">
+        <header class="note-year-heading"><div><span>ANNO</span><h2>2023</h2></div><p>1 LETTERS</p></header>
+        <div class="note-letter-list">
+          <article class="note-letter-row" data-note-item data-note-type="岁时书" data-note-date="2023-12-31">
+            <div class="note-date-rail"><span>31</span><small>12月</small><b></b></div>
+            <a class="note-letter-card" href="note-ai.html?note=%E4%BA%8C%E3%80%87%E4%BA%8C%E4%B8%89%EF%BC%8C%E5%BC%80%E5%A7%8B%E8%AE%B0%E5%BD%95"><header><span class="letter-badge badge-yearly">岁时书</span><small>晴 · 片刻</small></header><h3>二〇二三，开始记录</h3><p>从不稳定的想法里挑出几条真正愿意继续做的线。</p><footer><span>LETTER No.1</span><span>阅读全文 →</span></footer></a>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer class="footer reveal"><div><strong>Bamboo</strong><p>Stay hungry. Stay foolish.</p><small>&copy; 2020-2026 Powered by Mix Space & Yohaku.</small></div><div class="footer-links"><a href="about.html">关于</a><a href="message.html">留言</a></div><div class="footer-links"><a href="posts.html">文稿</a><a href="notes.html">手记</a></div><div class="footer-links"><a href="message.html">留言</a><a href="timeline.html">时光</a></div></footer>
+  <script src="assets/vendor/katex/katex.min.js?v=math-katex-1"></script>
+  <script src="script.js?v=math-katex-1"></script>
+</body>
+</html>
